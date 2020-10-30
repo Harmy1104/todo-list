@@ -1,16 +1,19 @@
-import { Grid } from "@material-ui/core";
+import { Container } from "@material-ui/core";
+import { Component } from "react";
+import Header from "./conponants/Header";
 import Todo from "./conponants/Todo";
 
-const App = () => {
-  return (
-    <div>
-      <Grid container spacing={3}>
-        <Grid item>
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <Container fixed>
+          <Header />
           <Todo />
-        </Grid>
-      </Grid>
-    </div>
-  );
-};
+        </Container>
+      </div>
+    );
+  }
+}
 
 export default App;
