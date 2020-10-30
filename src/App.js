@@ -1,19 +1,35 @@
-import { Container } from "@material-ui/core";
-import { Component } from "react";
+import {
+  Container,
+  createMuiTheme,
+  CssBaseline,
+  ThemeProvider,
+} from "@material-ui/core";
+import { useState } from "react";
 import Header from "./conponants/Header";
-import Todo from "./conponants/Todo";
+import TodoList from "./conponants/TodoList";
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <Container fixed>
-          <Header />
-          <Todo />
-        </Container>
-      </div>
-    );
-  }
-}
+const App = () => {
+  let [themeState, setThemeState] = useState(false);
+
+  const setTheme = () => {
+    setThemeState((themeState = !themeState));
+  };
+
+  const theme = createMuiTheme({
+    palette: {
+      type: themeState ? "light" : "dark",
+    },
+  });
+
+  return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container fixed>
+        <Header onThemeToggleClick={setTheme} />
+        <TodoList />
+      </Container>
+    </ThemeProvider>
+  );
+};
 
 export default App;

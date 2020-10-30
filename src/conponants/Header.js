@@ -1,12 +1,43 @@
-import { Typography } from "@material-ui/core";
-import React from "react";
+import {
+  AppBar,
+  makeStyles,
+  Switch,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+import { Brightness3, WbSunny } from "@material-ui/icons";
+import React, { useState } from "react";
 
-export default function Header() {
+const Header = ({ onThemeToggleClick }) => {
+  const useStyles = makeStyles({
+    themeToggle: {
+      display: "flex",
+      alignItems: "center",
+    },
+    appBar: {
+      backgroundColor: "#ff0000",
+    },
+  });
+  let [isThemeToggleChecked, setIsThemeToggleChecked] = useState(false);
+  const setTheme = () => {
+    setIsThemeToggleChecked((isThemeToggleChecked = !isThemeToggleChecked));
+    onThemeToggleClick(isThemeToggleChecked);
+  };
+
+  const classes = useStyles();
   return (
     <div>
-      <Typography>
-        <h1>This is the Header</h1>
-      </Typography>
+      <AppBar color={classes.appBar}>
+        <Toolbar>
+          <Typography component="div" className={classes.themeToggle}>
+            <Brightness3 />
+            <Switch checked={isThemeToggleChecked} onChange={setTheme} />
+            <WbSunny />
+          </Typography>
+        </Toolbar>
+      </AppBar>
     </div>
   );
-}
+};
+
+export default Header;

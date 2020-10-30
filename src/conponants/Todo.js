@@ -10,19 +10,19 @@ import { useState } from "react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 2,
+    flexGrow: 1,
     overflow: "hidden",
     padding: theme.spacing(0, 3),
   },
   paper: {
-    maxWidth: 400,
-    margin: `${theme.spacing(1)}px auto`,
-    padding: theme.spacing(1),
+    maxWidth: "720px",
+    margin: `${theme.spacing(0.5)}px auto`,
+    padding: theme.spacing(0.5),
   },
 }));
 
 const Todo = () => {
-  const [isChecked, setChecked] = useState(true);
+  const [isChecked, setChecked] = useState(false);
   const checkBoxHandler = () => {
     setChecked(!isChecked);
   };
@@ -39,7 +39,7 @@ const Todo = () => {
             />
           </Grid>
           <Grid item>
-            <Typography></Typography>
+            <Typography component="p">this is a todo</Typography>
           </Grid>
         </Grid>
       </Paper>
