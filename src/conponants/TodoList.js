@@ -28,18 +28,6 @@ const TodoList = () => {
       <Todo />
       <Todo />
       <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
-      <Todo />
     </div>
   );
 };

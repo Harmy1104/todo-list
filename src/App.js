@@ -33,7 +33,7 @@ const App = () => {
           <Nav onThemeToggleClick={setTheme} />
         </Grid>
         <Grid item container justify="center" className={classes.todoGrid}>
-          <Grid item xs={12}>
+          <Grid item container justify="space-around" xs={12}>
             <InputTodo />
           </Grid>
           <Grid item xs={12}>

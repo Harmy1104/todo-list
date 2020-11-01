@@ -1,4 +1,11 @@
-import { Grid, makeStyles, Switch, Typography } from "@material-ui/core";
+import {
+  Grid,
+  makeStyles,
+  Switch,
+  Typography,
+  withStyles,
+} from "@material-ui/core";
+import { blue, grey } from "@material-ui/core/colors";
 import { Brightness3, WbSunny } from "@material-ui/icons";
 import React, { useState } from "react";
 
@@ -9,17 +16,17 @@ const Nav = ({ onThemeToggleClick }) => {
     onThemeToggleClick(isThemeToggleChecked);
   };
 
-  const classes = useStyles();
+  const style = useStyles();
   return (
     <Grid container justify="space-around" alignItems="center" xs={12}>
       <Grid item>
         <Typography variant="h2">Todo List App</Typography>
       </Grid>
       <Grid item>
-        <div className={classes.themeToggle}>
-          <Brightness3 />
+        <div className={style.toggleContainer}>
+          <Brightness3 className={style.mobile.icons} />
           <Switch
-            color="secondary"
+            color="primary"
             checked={isThemeToggleChecked}
             onChange={setTheme}
           />
@@ -30,12 +37,43 @@ const Nav = ({ onThemeToggleClick }) => {
   );
 };
 
+// custom switch
+const Toggle = withStyles({
+  switchBase: {
+    color: blue[500],
+    "&$checked": {
+      color: blue[500],
+    },
+    "&$checked + $track": {
+      backgroundColor: grey[500],
+    },
+  },
+  checked: {},
+  track: {},
+})(Switch);
+
 // CSS
-const useStyles = makeStyles({
-  themeToggle: {
+const useStyles = makeStyles((theme) => ({
+  toggleContainer: {
     display: "flex",
     alignItems: "center",
   },
-});
+  toggleRoot: {
+    color: blue[500],
+    "&$checked": {
+      color: blue[500],
+    },
+    "&$checked + $track": {
+      backgroundColor: grey[500],
+    },
+  },
+  mobile: {
+    icons: {
+      [theme.breakpoints.down("md")]: {
+        fontSize: "12px",
+      },
+    },
+  },
+}));
 
 export default Nav;

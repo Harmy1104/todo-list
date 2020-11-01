@@ -16,7 +16,7 @@ const Todo = () => {
   const classes = useStyles();
   return (
     <Paper className={classes.paper}>
-      <Grid container>
+      <Grid container alignItems="center">
         <Grid item>
           <Checkbox
             checked={isChecked}
