@@ -8,7 +8,7 @@ import {
 import React from "react";
 import { useState } from "react";
 
-const Todo = () => {
+const Todo = ({ todo }) => {
   const [isChecked, setChecked] = useState(false);
   const checkBoxHandler = () => {
     setChecked(!isChecked);
@@ -25,7 +25,7 @@ const Todo = () => {
           />
         </Grid>
         <Grid item>
-          <Typography component="p">this is a todo</Typography>
+          <Typography variant="h6">{todo}</Typography>
         </Grid>
       </Grid>
     </Paper>
@@ -35,7 +35,7 @@ const Todo = () => {
 // CSS
 const useStyles = makeStyles((theme) => ({
   paper: {
-    maxWidth: "720px",
+    // maxWidth: "720px",
     margin: `${theme.spacing(1)}px auto`,
     padding: theme.spacing(1),
   },

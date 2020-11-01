@@ -18,7 +18,7 @@ const Nav = ({ onThemeToggleClick }) => {
 
   const style = useStyles();
   return (
-    <Grid container justify="space-around" alignItems="center" xs={12}>
+    <Grid container justify="space-evenly" alignItems="center" xs={12}>
       <Grid item>
         <Typography variant="h2">Todo List App</Typography>
       </Grid>

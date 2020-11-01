@@ -7,7 +7,6 @@ import {
 } from "@material-ui/core";
 import { useState } from "react";
 import Nav from "./conponants/Nav";
-import InputTodo from "./conponants/InputTodo";
 import TodoList from "./conponants/TodoList";
 
 const App = () => {
@@ -33,10 +32,13 @@ const App = () => {
           <Nav onThemeToggleClick={setTheme} />
         </Grid>
         <Grid item container justify="center" className={classes.todoGrid}>
-          <Grid item container justify="space-around" xs={12}>
-            <InputTodo />
-          </Grid>
-          <Grid item xs={12}>
+          <Grid
+            item
+            container
+            justify="center"
+            xs={8}
+            className={classes.todoGrid}
+          >
             <TodoList />
           </Grid>
         </Grid>
