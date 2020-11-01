@@ -19,6 +19,9 @@ const App = () => {
   const theme = createMuiTheme({
     palette: {
       type: themeState ? "light" : "dark",
+      primary: {
+        main: themeState ? "#f00" : "#0f0",
+      },
     },
   });
 

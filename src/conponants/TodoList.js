@@ -37,7 +37,7 @@ const TodoList = () => {
       </Grid>
       {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((i) => {
         return (
-          <Grid item xs={12}>
+          <Grid item xs={12} key={i}>
             <Todo todo={i} />
           </Grid>
         );
