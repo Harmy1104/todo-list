@@ -16,11 +16,19 @@ const App = () => {
     setThemeState((themeState = !themeState));
   };
 
+  // TODO: Move the theme to a different file
   const theme = createMuiTheme({
     palette: {
       type: themeState ? "light" : "dark",
       primary: {
-        main: themeState ? "#f00" : "#0f0",
+        light: themeState ? "#1aabff" : "#4694d3",
+        main: themeState ? "#4694d3" : "#2c7ab9",
+        dark: themeState ? "#0091e6" : "#2c7ab9",
+      },
+      secondary: {
+        light: themeState ? "#1aabff" : "#4694d3",
+        main: themeState ? "#4acfbe" : "#2a9d8f",
+        dark: themeState ? "#0091e6" : "#2c7ab9",
       },
     },
   });
