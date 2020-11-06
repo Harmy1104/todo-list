@@ -20,7 +20,7 @@ const ThemeContextProvider = (props) => {
 
   return (
     <ThemeContext.Provider value={{ theme }}>
-      {props.childern}
+      {props.children}
     </ThemeContext.Provider>
   );
 };
