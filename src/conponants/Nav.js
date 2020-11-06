@@ -1,4 +1,11 @@
-import { Grid, makeStyles, Switch, Typography } from "@material-ui/core";
+import {
+  AppBar,
+  makeStyles,
+  Switch,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+import { blueGrey, grey, orange } from "@material-ui/core/colors";
 import { Brightness3, WbSunny } from "@material-ui/icons";
 import React, { useState } from "react";
 
@@ -9,32 +16,35 @@ const Nav = ({ onThemeToggleClick }) => {
     onThemeToggleClick(isThemeToggleChecked);
   };
 
-  const style = useStyles();
+  const classes = useStyles();
   return (
-    <Grid container justify="space-evenly" alignItems="center">
-      <Grid item>
-        <Typography variant="h2">Todo List App</Typography>
-      </Grid>
-      <Grid item>
-        <div className={style.toggleContainer}>
+    <AppBar color="primary" classes={{ root: classes.root }}>
+      <Toolbar>
+        <Typography variant="h4" className={classes.title}>
+          Todo
+        </Typography>
+        <div className={classes.toggleContainer}>
           <Brightness3 />
-          <Switch
-            color="primary"
-            checked={isThemeToggleChecked}
-            onChange={setTheme}
-          />
+          <Switch checked={isThemeToggleChecked} onChange={setTheme} />
           <WbSunny />
         </div>
-      </Grid>
-    </Grid>
+      </Toolbar>
+    </AppBar>
   );
 };
 
 // CSS
 const useStyles = makeStyles((theme) => ({
+  root: {
+    background: "#2a9d8f",
+    color: "#fff",
+  },
   toggleContainer: {
     display: "flex",
     alignItems: "center",
+  },
+  title: {
+    flexGrow: 1,
   },
 }));
 
