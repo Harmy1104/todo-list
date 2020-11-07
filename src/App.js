@@ -1,32 +1,30 @@
-import {
-  createMuiTheme,
-  CssBaseline,
-  Grid,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core";
-import { cyan, lightBlue } from "@material-ui/core/colors";
-import { useState } from "react";
+import { CssBaseline, Grid, ThemeProvider } from "@material-ui/core";
+import { useContext } from "react";
 import Nav from "./conponants/Nav";
 import TodoList from "./conponants/TodoList";
-import ThemeContextProvider from "./context/ThemeContext";
+import ThemeContextProvider, { ThemeContext } from "./context/ThemeContext";
 
 const App = () => {
-  let [themeState, setThemeState] = useState(false);
+  const theme = useContext(ThemeContext);
+  console.log(theme);
 
   const setTheme = () => {
-    setThemeState((themeState = !themeState));
+    console.log("working");
   };
-
   return (
-    <ThemeProvider>
-      <CssBaseline />
-      <ThemeContextProvider>
-        <h1>hahaha its not working any more</h1>
-        <Nav onThemeToggleClick={setTheme} />
-        <TodoList />
-      </ThemeContextProvider>
-    </ThemeProvider>
+    <ThemeContextProvider>
+      <ThemeProvider>
+        <CssBaseline />
+        <Grid container justify="center">
+          <Grid item>
+            <Nav />
+          </Grid>
+          <Grid item xs={8}>
+            <TodoList />
+          </Grid>
+        </Grid>
+      </ThemeProvider>
+    </ThemeContextProvider>
   );
 };
 

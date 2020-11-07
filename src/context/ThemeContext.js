@@ -4,23 +4,36 @@ import React, { createContext, useState } from "react";
 
 export const ThemeContext = createContext();
 
-const ThemeContextProvider = (props) => {
-  const [theme, setTheme] = useState({
-    isDarkMode: true,
-    ui: null,
-  });
-
-  const ui = createMuiTheme({
-    palette: {
-      type: theme.isDarkMode ? "dark" : "light",
-      primary: cyan,
-      secondary: lightBlue,
+const ThemeContextProvider = ({ children }) => {
+  const [theme, setTheme] = useState([
+    {
+      isDarkMode: true,
+      ui: createMuiTheme({
+        palette: {
+          type: "dark",
+          primary: cyan,
+          secondary: lightBlue,
+        },
+      }),
     },
-  });
+  ]);
+
+  const toggleTheme = () => {
+    setTheme({
+      isDarkMode: !theme.isDarkMode,
+      ui: createMuiTheme({
+        palette: {
+          type: theme.isDarkMode ? "dark" : "light",
+          primary: cyan,
+          secondary: lightBlue,
+        },
+      }),
+    });
+  };
 
   return (
-    <ThemeContext.Provider value={{ theme }}>
-      {props.children}
+    <ThemeContext.Provider value={{ ...theme }}>
+      {children}
     </ThemeContext.Provider>
   );
 };

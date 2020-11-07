@@ -1,33 +1,28 @@
 import {
   AppBar,
+  IconButton,
   makeStyles,
-  Switch,
   Toolbar,
   Typography,
 } from "@material-ui/core";
-import { blueGrey, grey, orange } from "@material-ui/core/colors";
-import { Brightness3, WbSunny } from "@material-ui/icons";
+import { Brightness3, WbSunnyRounded } from "@material-ui/icons";
 import React, { useState } from "react";
 
-const Nav = ({ onThemeToggleClick }) => {
-  let [isThemeToggleChecked, setIsThemeToggleChecked] = useState(false);
-  const setTheme = (event) => {
-    setIsThemeToggleChecked((isThemeToggleChecked = event.target.checked));
-    onThemeToggleClick(isThemeToggleChecked);
+const Nav = () => {
+  const setTheme = () => {
+    console.log("working");
   };
 
   const classes = useStyles();
   return (
     <AppBar color="primary" classes={{ root: classes.root }}>
-      <Toolbar>
+      <Toolbar className={classes.toolBar}>
         <Typography variant="h4" className={classes.title}>
           Todo
         </Typography>
-        <div className={classes.toggleContainer}>
-          <Brightness3 />
-          <Switch checked={isThemeToggleChecked} onChange={setTheme} />
-          <WbSunny />
-        </div>
+        <IconButton onClick={setTheme} aria-label="mode">
+          <WbSunnyRounded />
+        </IconButton>
       </Toolbar>
     </AppBar>
   );
@@ -39,9 +34,8 @@ const useStyles = makeStyles((theme) => ({
     background: "#2a9d8f",
     color: "#fff",
   },
-  toggleContainer: {
-    display: "flex",
-    alignItems: "center",
+  toolBar: {
+    padding: "0 4rem",
   },
   title: {
     flexGrow: 1,

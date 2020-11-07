@@ -17,7 +17,7 @@ const TodoList = () => {
   const classes = useStyles();
 
   return (
-    <Grid container>
+    <Grid container className={classes.root}>
       <Grid item xs={12}>
         <FormControl variant="outlined" style={{ width: "100%" }}>
           <InputLabel>{inputLabel}</InputLabel>
@@ -47,6 +47,10 @@ const TodoList = () => {
 };
 
 // CSS
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: theme.spacing(30),
+  },
+}));
 
 export default TodoList;
