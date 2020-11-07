@@ -6,21 +6,20 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Brightness3, WbSunnyRounded } from "@material-ui/icons";
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Nav = () => {
-  const setTheme = () => {
-    console.log("working");
-  };
-
   const classes = useStyles();
+  const { isDarkMode, toggleMode } = useContext(ThemeContext);
+
   return (
     <AppBar color="primary" classes={{ root: classes.root }}>
       <Toolbar className={classes.toolBar}>
         <Typography variant="h4" className={classes.title}>
           Todo
         </Typography>
-        <IconButton onClick={setTheme} aria-label="mode">
+        <IconButton onClick={toggleMode} aria-label="mode">
           <WbSunnyRounded />
         </IconButton>
       </Toolbar>
@@ -29,7 +28,7 @@ const Nav = () => {
 };
 
 // CSS
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
     background: "#2a9d8f",
     color: "#fff",
@@ -40,6 +39,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-}));
+});
 
 export default Nav;

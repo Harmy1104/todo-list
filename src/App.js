@@ -2,29 +2,23 @@ import { CssBaseline, Grid, ThemeProvider } from "@material-ui/core";
 import { useContext } from "react";
 import Nav from "./conponants/Nav";
 import TodoList from "./conponants/TodoList";
-import ThemeContextProvider, { ThemeContext } from "./context/ThemeContext";
+import { ThemeContext } from "./context/ThemeContext";
 
 const App = () => {
-  const theme = useContext(ThemeContext);
-  console.log(theme);
+  const { theme } = useContext(ThemeContext);
 
-  const setTheme = () => {
-    console.log("working");
-  };
   return (
-    <ThemeContextProvider>
-      <ThemeProvider>
-        <CssBaseline />
-        <Grid container justify="center">
-          <Grid item>
-            <Nav />
-          </Grid>
-          <Grid item xs={8}>
-            <TodoList />
-          </Grid>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Grid container justify="center">
+        <Grid item>
+          <Nav />
         </Grid>
-      </ThemeProvider>
-    </ThemeContextProvider>
+        <Grid item xs={8}>
+          <TodoList />
+        </Grid>
+      </Grid>
+    </ThemeProvider>
   );
 };
 
