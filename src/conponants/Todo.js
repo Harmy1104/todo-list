@@ -5,27 +5,28 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import React from "react";
-import { useState } from "react";
+import React, { useContext } from "react";
+import { TodoContext } from "../context/TodoContext";
 
 const Todo = ({ todo }) => {
-  const [isChecked, setChecked] = useState(false);
-  const checkBoxHandler = () => {
-    setChecked(!isChecked);
-  };
   const classes = useStyles();
+
+  const { markDone } = useContext(TodoContext);
+
   return (
     <Paper className={classes.paper}>
       <Grid container alignItems="center">
         <Grid item>
           <Checkbox
-            checked={isChecked}
-            onChange={checkBoxHandler}
+            checked={todo.completed}
+            onChange={() => markDone(todo.id)}
             inputProps={{ "aria-label": "primary checkbox" }}
           />
         </Grid>
         <Grid item>
-          <Typography variant="h6">{todo}</Typography>
+          <Typography variant="h6" className={classes.todoText}>
+            {todo.title}
+          </Typography>
         </Grid>
       </Grid>
     </Paper>
@@ -35,9 +36,11 @@ const Todo = ({ todo }) => {
 // CSS
 const useStyles = makeStyles((theme) => ({
   paper: {
-    // maxWidth: "720px",
-    margin: `${theme.spacing(1)}px auto`,
+    marginTop: `${theme.spacing(2)}px`,
     padding: theme.spacing(1),
+  },
+  todoText: {
+    marginLeft: theme.spacing(2),
   },
 }));
 

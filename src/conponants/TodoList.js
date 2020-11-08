@@ -8,13 +8,16 @@ import {
   OutlinedInput,
 } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
-import React from "react";
+import React, { useContext, useState } from "react";
+import { TodoContext } from "../context/TodoContext";
 import Todo from "./Todo";
 
-const inputLabel = "Enter Todo";
-
 const TodoList = () => {
+  const inputLabel = "Enter Todo";
   const classes = useStyles();
+
+  let [value, setValue] = useState("");
+  const { todos, addTodo } = useContext(TodoContext);
 
   return (
     <Grid container className={classes.root}>
@@ -24,9 +27,14 @@ const TodoList = () => {
           <OutlinedInput
             id="outlined-adornment-password"
             type="text"
+            value={value}
+            onChange={(event) => setValue((value = event.target.value))}
             endAdornment={
               <InputAdornment position="end">
-                <IconButton aria-label="toggle password visibility" edge="end">
+                <IconButton
+                  aria-label="add todo"
+                  onClick={(event) => addTodo(value)}
+                >
                   <Add />
                 </IconButton>
               </InputAdornment>
@@ -35,10 +43,10 @@ const TodoList = () => {
           />
         </FormControl>
       </Grid>
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((i) => {
+      {todos.map((todo) => {
         return (
-          <Grid item xs={12} key={i}>
-            <Todo todo={i} />
+          <Grid item xs={12} key={todo.id}>
+            <Todo todo={todo} />
           </Grid>
         );
       })}
@@ -50,6 +58,7 @@ const TodoList = () => {
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(30),
+    marginBottom: theme.spacing(6),
   },
 }));
 

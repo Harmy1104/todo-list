@@ -19,8 +19,12 @@ const Nav = () => {
         <Typography variant="h4" className={classes.title}>
           Todo
         </Typography>
-        <IconButton onClick={toggleMode} aria-label="mode">
-          <WbSunnyRounded />
+        <IconButton
+          classes={{ root: classes.root }}
+          onClick={toggleMode}
+          aria-label="mode"
+        >
+          {isDarkMode ? <WbSunnyRounded /> : <Brightness3 />}
         </IconButton>
       </Toolbar>
     </AppBar>
@@ -30,7 +34,6 @@ const Nav = () => {
 // CSS
 const useStyles = makeStyles({
   root: {
-    background: "#2a9d8f",
     color: "#fff",
   },
   toolBar: {

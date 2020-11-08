@@ -1,5 +1,5 @@
 import { createMuiTheme } from "@material-ui/core";
-import { cyan, lightBlue } from "@material-ui/core/colors";
+import { lightBlue, red } from "@material-ui/core/colors";
 import React, { createContext, useState } from "react";
 
 export const ThemeContext = createContext();
@@ -9,8 +9,16 @@ const ThemeContextProvider = (props) => {
   const theme = createMuiTheme({
     palette: {
       type: isDarkMode ? "dark" : "light",
-      primary: cyan,
-      secondary: lightBlue,
+      primary: {
+        light: isDarkMode ? lightBlue[300] : red[200],
+        main: isDarkMode ? lightBlue[500] : red[400],
+        dark: isDarkMode ? lightBlue[700] : red[600],
+      },
+      secondary: {
+        light: isDarkMode ? lightBlue[300] : red[200],
+        main: isDarkMode ? lightBlue[500] : red[400],
+        dark: isDarkMode ? lightBlue[700] : red[600],
+      },
     },
   });
 
