@@ -33,7 +33,10 @@ const TodoList = () => {
               <InputAdornment position="end">
                 <IconButton
                   aria-label="add todo"
-                  onClick={(event) => addTodo(value)}
+                  onClick={() => {
+                    addTodo(value);
+                    setValue((value = ""));
+                  }}
                 >
                   <Add />
                 </IconButton>

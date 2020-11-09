@@ -4,18 +4,7 @@ import { v4 as uuid } from "uuid";
 export const TodoContext = createContext();
 
 const TodoContextProvider = (props) => {
-  const [todos, setTodo] = useState([
-    {
-      id: 1,
-      title: "delectus aut autem",
-      completed: false,
-    },
-    {
-      id: 2,
-      title: "quis ut nam facilis et officia qui",
-      completed: false,
-    },
-  ]);
+  const [todos, setTodo] = useState([]);
 
   const addTodo = (title) => {
     setTodo([
@@ -29,13 +18,14 @@ const TodoContextProvider = (props) => {
   };
 
   const markDone = (id) => {
-    todos.filter((todo) => {
-      if (todo.id == id) {
-        todo.completed = !todo.completed;
-        console.log(todo.completed);
-      }
-      return todo;
-    });
+    setTodo([
+      ...todos.filter((todo) => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed;
+        }
+        return todo;
+      }),
+    ]);
   };
 
   return (

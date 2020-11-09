@@ -9,6 +9,18 @@ import React, { useContext } from "react";
 import { TodoContext } from "../context/TodoContext";
 
 const Todo = ({ todo }) => {
+  // CSS
+  const useStyles = makeStyles((theme) => ({
+    paper: {
+      marginTop: `${theme.spacing(2)}px`,
+      padding: theme.spacing(1),
+    },
+    todoText: {
+      marginLeft: theme.spacing(2),
+      opacity: todo.completed ? "0.3" : "1",
+      fontWeight: todo.completed ? "100" : "200",
+    },
+  }));
   const classes = useStyles();
 
   const { markDone } = useContext(TodoContext);
@@ -19,7 +31,8 @@ const Todo = ({ todo }) => {
         <Grid item>
           <Checkbox
             checked={todo.completed}
-            onChange={() => markDone(todo.id)}
+            // onChange={() => markDone(todo.id)}
+            onClick={() => markDone(todo.id)}
             inputProps={{ "aria-label": "primary checkbox" }}
           />
         </Grid>
@@ -32,16 +45,5 @@ const Todo = ({ todo }) => {
     </Paper>
   );
 };
-
-// CSS
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    marginTop: `${theme.spacing(2)}px`,
-    padding: theme.spacing(1),
-  },
-  todoText: {
-    marginLeft: theme.spacing(2),
-  },
-}));
 
 export default Todo;
