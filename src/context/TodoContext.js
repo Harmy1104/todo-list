@@ -7,14 +7,16 @@ const TodoContextProvider = (props) => {
   const [todos, setTodo] = useState([]);
 
   const addTodo = (title) => {
-    setTodo([
-      ...todos,
-      {
-        id: uuid(),
-        title: title,
-        completed: false,
-      },
-    ]);
+    if (title !== "") {
+      setTodo([
+        ...todos,
+        {
+          id: uuid(),
+          title: title,
+          completed: false,
+        },
+      ]);
+    }
   };
 
   const markDone = (id) => {

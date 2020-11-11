@@ -16,8 +16,8 @@ const TodoList = () => {
   const inputLabel = "Enter Todo";
   const classes = useStyles();
 
-  let [value, setValue] = useState("");
   const { todos, addTodo } = useContext(TodoContext);
+  let [title, setTitle] = useState("");
 
   return (
     <Grid container className={classes.root}>
@@ -27,15 +27,21 @@ const TodoList = () => {
           <OutlinedInput
             id="outlined-adornment-password"
             type="text"
-            value={value}
-            onChange={(event) => setValue((value = event.target.value))}
+            value={title}
+            onChange={(event) => setTitle((title = event.target.value))}
+            onKeyPress={(event) => {
+              if (event.key === "Enter") {
+                addTodo(title);
+                setTitle((title = ""));
+              }
+            }}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
                   aria-label="add todo"
                   onClick={() => {
-                    addTodo(value);
-                    setValue((value = ""));
+                    addTodo(title);
+                    setTitle((title = ""));
                   }}
                 >
                   <Add />
