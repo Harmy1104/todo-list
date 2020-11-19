@@ -9,12 +9,12 @@ const TodoContextProvider = (props) => {
   const addTodo = (title) => {
     if (title !== "") {
       setTodo([
-        ...todos,
         {
           id: uuid(),
           title: title,
           completed: false,
         },
+        ...todos,
       ]);
     }
   };

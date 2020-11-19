@@ -66,7 +66,7 @@ const TodoList = () => {
 // CSS
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(30),
+    marginTop: "10vh",
     marginBottom: theme.spacing(6),
   },
 }));
