@@ -11,7 +11,7 @@ const app = firebase.initializeApp({
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 });
 
-export const uiConfig = {
+export const loginBtnConfig = {
   signInFlow: "popup",
   //   signInSuccessUrl: "/signedIn",
   signInOptions: [
