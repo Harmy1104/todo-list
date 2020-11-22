@@ -1,10 +1,14 @@
 import { createMuiTheme } from "@material-ui/core";
 import { lightBlue, red } from "@material-ui/core/colors";
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 export const ThemeContext = createContext();
 
-const ThemeContextProvider = (props) => {
+export const useThemeContext = () => {
+  return useContext(ThemeContext);
+};
+
+const ThemeContextProvider = ({ children }) => {
   const [isDarkMode, setMode] = useState(true);
   const theme = createMuiTheme({
     palette: {
@@ -28,7 +32,7 @@ const ThemeContextProvider = (props) => {
 
   return (
     <ThemeContext.Provider value={{ isDarkMode, theme, toggleMode }}>
-      {props.children}
+      {children}
     </ThemeContext.Provider>
   );
 };

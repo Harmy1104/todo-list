@@ -1,9 +1,13 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { v4 as uuid } from "uuid";
 
 export const TodoContext = createContext();
 
-const TodoContextProvider = (props) => {
+export const useTodoContext = () => {
+  return useContext(TodoContext);
+};
+
+const TodoContextProvider = ({ children }) => {
   const [todos, setTodo] = useState([]);
 
   const addTodo = (title) => {
@@ -12,18 +16,30 @@ const TodoContextProvider = (props) => {
         {
           id: uuid(),
           title: title,
-          completed: false,
+          isComplete: false,
+          isDeleted: false,
         },
         ...todos,
       ]);
     }
   };
 
+  const removeTodo = (id) => {
+    setTodo([
+      ...todos.filter((todo) => {
+        if (todo.id === id) {
+          todo.isDeleted = true;
+        }
+        return todo.isDeleted ? "" : todo;
+      }),
+    ]);
+  };
+
   const markDone = (id) => {
     setTodo([
       ...todos.filter((todo) => {
         if (todo.id === id) {
-          todo.completed = !todo.completed;
+          todo.isComplete = !todo.isComplete;
         }
         return todo;
       }),
@@ -31,8 +47,8 @@ const TodoContextProvider = (props) => {
   };
 
   return (
-    <TodoContext.Provider value={{ todos, addTodo, markDone }}>
-      {props.children}
+    <TodoContext.Provider value={{ todos, addTodo, markDone, removeTodo }}>
+      {children}
     </TodoContext.Provider>
   );
 };

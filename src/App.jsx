@@ -1,18 +1,21 @@
 import { CssBaseline, ThemeProvider } from "@material-ui/core";
-import { useContext } from "react";
+import { useThemeContext } from "./context/ThemeContext";
+import { Route, Switch } from "react-router-dom";
 import Login from "./conponants/Login";
 import TodoDashboard from "./conponants/TodoDashboard";
-import { ThemeContext } from "./context/ThemeContext";
-import { Route, Switch } from "react-router-dom";
+import ErrorPage from "./conponants/ErrorPage";
 
 const App = () => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useThemeContext();
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Route exact path="/" component={Login} />
-      <Route exact path="/todos" component={TodoDashboard} />
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/" component={TodoDashboard} />
+        <Route path="*" component={ErrorPage} />
+      </Switch>
     </ThemeProvider>
   );
 };

@@ -8,15 +8,15 @@ import {
   OutlinedInput,
 } from "@material-ui/core";
 import { Add } from "@material-ui/icons";
-import React, { useContext, useState } from "react";
-import { TodoContext } from "../context/TodoContext";
+import React, { useState } from "react";
+import { useTodoContext } from "../context/TodoContext";
 import Todo from "./Todo";
 
 const TodoList = () => {
   const inputLabel = "Enter Todo";
   const classes = useStyles();
 
-  const { todos, addTodo } = useContext(TodoContext);
+  const { todos, addTodo } = useTodoContext();
   let [title, setTitle] = useState("");
 
   return (

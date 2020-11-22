@@ -1,14 +1,14 @@
-import { IconButton, makeStyles } from "@material-ui/core";
+import { IconButton, makeStyles, Typography } from "@material-ui/core";
 import { Brightness3, WbSunnyRounded } from "@material-ui/icons";
-import React, { useContext } from "react";
-import { ThemeContext } from "../context/ThemeContext";
+import { ThemeContext, useThemeContext } from "../context/ThemeContext";
 
-const Nav = () => {
+const Nav = ({ name }) => {
   const classes = useStyles();
-  const { isDarkMode, toggleMode } = useContext(ThemeContext);
+  const { isDarkMode, toggleMode } = useThemeContext();
 
   return (
     <div className={classes.toolBar}>
+      <Typography variant="h3">{name}</Typography>
       <IconButton
         className={classes.icon}
         onClick={toggleMode}

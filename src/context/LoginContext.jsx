@@ -1,16 +1,16 @@
-import React, { createContext } from "react";
+import React, { createContext, useState } from "react";
+import firebase from "firebase";
+import { auth } from "../firebase";
 
 export const LoginContext = createContext();
 
-const LoginContextProvider = (props) => {
-  const test = {
-    id: 1,
-    msg: "this is test",
-  };
+const Login = () => {};
 
+const LoginContextProvider = ({ children }) => {
+  const [user, setUser] = useState("");
   return (
-    <LoginContext.Provider value={{ test }}>
-      {props.children}
+    <LoginContext.Provider value={{ test, Login }}>
+      {children}
     </LoginContext.Provider>
   );
 };

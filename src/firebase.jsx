@@ -11,9 +11,11 @@ const app = firebase.initializeApp({
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
 });
 
+export const auth = app.auth();
+
 export const loginBtnConfig = {
   signInFlow: "popup",
-  //   signInSuccessUrl: "/signedIn",
+  signInSuccessUrl: "/",
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.FacebookAuthProvider.PROVIDER_ID,
@@ -21,5 +23,4 @@ export const loginBtnConfig = {
   ],
 };
 
-export const auth = app.auth();
 export default app;
