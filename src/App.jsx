@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import Login from "./conponants/Login";
 import TodoDashboard from "./conponants/TodoDashboard";
 import ErrorPage from "./conponants/ErrorPage";
+import UserContextProvider, { useUserContext } from "./context/UserContext";
 
 const App = () => {
   const { theme } = useThemeContext();
@@ -13,7 +14,9 @@ const App = () => {
       <CssBaseline />
       <Switch>
         <Route exact path="/login" component={Login} />
-        <Route exact path="/" component={TodoDashboard} />
+        <UserContextProvider>
+          <Route exact path="/" component={TodoDashboard} />
+        </UserContextProvider>
         <Route path="*" component={ErrorPage} />
       </Switch>
     </ThemeProvider>

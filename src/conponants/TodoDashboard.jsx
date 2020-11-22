@@ -1,34 +1,37 @@
-import { Grid } from "@material-ui/core";
+import { useEffect } from "react";
 import Nav from "./Nav";
 import TodoList from "./TodoList";
 import TodoContextProvider from "../context/TodoContext";
-import { useEffect } from "react";
-import { auth } from "../firebase";
+import { useUserContext } from "../context/UserContext";
+import { Grid, Typography } from "@material-ui/core";
 
 const TodoDashboard = () => {
-  let u = "";
+  const { user, setUserAccount } = useUserContext();
+  let unsubscribe = () => {};
+
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log(user);
-      u = user;
-    });
+    unsubscribe = setUserAccount();
     return () => {
       unsubscribe();
     };
   }, []);
 
-  return (
-    <Grid container justify="center">
-      <Grid item>
-        <Nav name={u} />
+  if (user) {
+    return (
+      <Grid container justify="center">
+        <Grid item>
+          <Nav unsub={unsubscribe} />
+        </Grid>
+        <Grid item xs={8} style={{ margin: "auto" }}>
+          <TodoContextProvider>
+            <TodoList />
+          </TodoContextProvider>
+        </Grid>
       </Grid>
-      <Grid item xs={8} style={{ margin: "auto" }}>
-        <TodoContextProvider>
-          <TodoList />
-        </TodoContextProvider>
-      </Grid>
-    </Grid>
-  );
+    );
+  } else {
+    return <Typography variant="h1">Loading...</Typography>;
+  }
 };
 
 export default TodoDashboard;

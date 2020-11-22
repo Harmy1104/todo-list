@@ -17,7 +17,6 @@ const TodoContextProvider = ({ children }) => {
           id: uuid(),
           title: title,
           isComplete: false,
-          isDeleted: false,
         },
         ...todos,
       ]);
@@ -28,9 +27,9 @@ const TodoContextProvider = ({ children }) => {
     setTodo([
       ...todos.filter((todo) => {
         if (todo.id === id) {
-          todo.isDeleted = true;
+          return "";
         }
-        return todo.isDeleted ? "" : todo;
+        return todo;
       }),
     ]);
   };

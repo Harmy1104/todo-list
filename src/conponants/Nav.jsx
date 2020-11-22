@@ -1,14 +1,26 @@
-import { IconButton, makeStyles, Typography } from "@material-ui/core";
-import { Brightness3, WbSunnyRounded } from "@material-ui/icons";
-import { ThemeContext, useThemeContext } from "../context/ThemeContext";
+import { Button, IconButton, makeStyles, Typography } from "@material-ui/core";
+import { Brightness3, ExitToApp, WbSunnyRounded } from "@material-ui/icons";
+import { useThemeContext } from "../context/ThemeContext";
+import { useUserContext } from "../context/UserContext";
 
-const Nav = ({ name }) => {
+const Nav = ({ unsub }) => {
   const classes = useStyles();
   const { isDarkMode, toggleMode } = useThemeContext();
+  const { user } = useUserContext();
+
+  const handleSignOut = () => {
+    console.log("sign out");
+    console.log(unsub);
+  };
 
   return (
     <div className={classes.toolBar}>
-      <Typography variant="h3">{name}</Typography>
+      <Typography variant="h5" className={classes.name}>
+        Hello, {user.displayName}
+      </Typography>
+      <Button className={classes.icon} onClick={() => handleSignOut()}>
+        Sign Out
+      </Button>
       <IconButton
         className={classes.icon}
         onClick={toggleMode}
@@ -21,16 +33,22 @@ const Nav = ({ name }) => {
 };
 
 // CSS
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   toolBar: {
-    display: "flex",
     width: "100vw",
-    justifyContent: "flex-end",
+    marginTop: "2rem",
+    display: "flex",
+    // justifyContent: "flex-end",
+    alignItems: "center",
   },
   icon: {
-    marginTop: "2rem",
-    marginRight: "2rem",
+    marginRight: theme.spacing(5),
   },
-});
+  name: {
+    marginLeft: theme.spacing(5),
+    marginRight: theme.spacing(5),
+    flexGrow: "1",
+  },
+}));
 
 export default Nav;
