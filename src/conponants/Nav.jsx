@@ -1,16 +1,19 @@
 import { Button, IconButton, makeStyles, Typography } from "@material-ui/core";
-import { Brightness3, ExitToApp, WbSunnyRounded } from "@material-ui/icons";
+import { Brightness3, WbSunnyRounded } from "@material-ui/icons";
+import { Redirect } from "react-router-dom";
 import { useThemeContext } from "../context/ThemeContext";
 import { useUserContext } from "../context/UserContext";
+import { auth } from "../firebase";
 
-const Nav = ({ unsub }) => {
+const Nav = (props) => {
   const classes = useStyles();
   const { isDarkMode, toggleMode } = useThemeContext();
   const { user } = useUserContext();
 
   const handleSignOut = () => {
-    console.log("sign out");
-    console.log(unsub);
+    auth.signOut().then(() => {
+      props.props.history.push("/login");
+    });
   };
 
   return (

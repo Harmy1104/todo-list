@@ -5,12 +5,11 @@ import TodoContextProvider from "../context/TodoContext";
 import { useUserContext } from "../context/UserContext";
 import { Grid, Typography } from "@material-ui/core";
 
-const TodoDashboard = () => {
+const TodoDashboard = (props) => {
   const { user, setUserAccount } = useUserContext();
-  let unsubscribe = () => {};
 
   useEffect(() => {
-    unsubscribe = setUserAccount();
+    const unsubscribe = setUserAccount();
     return () => {
       unsubscribe();
     };
@@ -20,7 +19,7 @@ const TodoDashboard = () => {
     return (
       <Grid container justify="center">
         <Grid item>
-          <Nav unsub={unsubscribe} />
+          <Nav props={props} />
         </Grid>
         <Grid item xs={8} style={{ margin: "auto" }}>
           <TodoContextProvider>
