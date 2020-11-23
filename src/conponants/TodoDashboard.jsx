@@ -8,8 +8,9 @@ import { Grid, Typography } from "@material-ui/core";
 const TodoDashboard = (props) => {
   const { user, setUserAccount } = useUserContext();
 
-  useEffect(() => {
-    const unsubscribe = setUserAccount();
+  useEffect(async () => {
+    const unsubscribe = await setUserAccount();
+    console.log(user);
     return () => {
       unsubscribe();
     };
@@ -29,7 +30,7 @@ const TodoDashboard = (props) => {
       </Grid>
     );
   } else {
-    return <Typography variant="h1">Loading...</Typography>;
+    return <Typography variant="h1">Please wait...</Typography>;
   }
 };
 
