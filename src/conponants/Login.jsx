@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   loginBtns: {
     background: "#404040",
     padding: "5rem 3rem",
-    border: "1px solid #ccc",
+    border: "1px solid #000",
     borderRadius: "10px",
   },
   loginContainer: {

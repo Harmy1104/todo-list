@@ -1,6 +1,5 @@
 import { Button, IconButton, makeStyles, Typography } from "@material-ui/core";
 import { Brightness3, WbSunnyRounded } from "@material-ui/icons";
-import { Redirect } from "react-router-dom";
 import { useThemeContext } from "../context/ThemeContext";
 import { useUserContext } from "../context/UserContext";
 import { auth } from "../firebase";

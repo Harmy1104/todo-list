@@ -4,17 +4,19 @@ import TodoList from "./TodoList";
 import TodoContextProvider from "../context/TodoContext";
 import { useUserContext } from "../context/UserContext";
 import { Grid, Typography } from "@material-ui/core";
-import sine from "../assets/sine.gif";
 
 const TodoDashboard = (props) => {
   const { user, setUserAccount } = useUserContext();
-
-  useEffect(async () => {
-    const unsubscribe = await setUserAccount();
+  useEffect(() => {
+    let unsubscribe;
+    const setUser = async () => {
+      unsubscribe = await setUserAccount();
+    };
+    setUser();
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [setUserAccount]);
 
   if (user) {
     return (
