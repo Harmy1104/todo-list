@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { auth } from "../firebase";
+import firebase, { auth } from "../firebase";
 
 export const UserContext = createContext();
 
@@ -9,6 +9,11 @@ export const useUserContext = () => {
 
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+
+  const setUserDatabase = () => {
+    const db = firebase.firestore();
+    db.collection('users').get()
+  };
 
   const setUserAccount = () => {
     const unsubscribe = auth.onAuthStateChanged((user) => {

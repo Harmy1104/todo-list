@@ -15,7 +15,7 @@ export const auth = app.auth();
 
 export const loginBtnConfig = {
   signInFlow: "popup",
-  signInSuccessUrl: "/",
+  signInSuccessUrl: "/app",
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
     firebase.auth.FacebookAuthProvider.PROVIDER_ID,

@@ -12,7 +12,7 @@ const Nav = (props) => {
 
   const handleSignOut = () => {
     auth.signOut().then(() => {
-      props.props.history.push("/login");
+      props.props.history.push("/");
     });
   };
 

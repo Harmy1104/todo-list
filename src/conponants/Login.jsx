@@ -1,5 +1,5 @@
-import { makeStyles, Paper } from "@material-ui/core";
-import React, { useEffect } from "react";
+import { makeStyles } from "@material-ui/core";
+import React from "react";
 import { StyledFirebaseAuth } from "react-firebaseui";
 import { auth, loginBtnConfig } from "../firebase";
 
@@ -8,26 +8,22 @@ const Login = () => {
 
   return (
     <div className={classes.loginContainer}>
-      <Paper elevation={6} className={classes.root}>
-        <StyledFirebaseAuth
-          className={classes.loginBtns}
-          uiConfig={loginBtnConfig}
-          firebaseAuth={auth}
-        />
-      </Paper>
+      <StyledFirebaseAuth
+        className={classes.loginBtns}
+        uiConfig={loginBtnConfig}
+        firebaseAuth={auth}
+      />
     </div>
   );
 };
 
 // CSS
 const useStyles = makeStyles({
-  root: {
-    width: "fit-content",
-    height: "fit-content",
-    margin: "auto",
-  },
   loginBtns: {
+    background: "#404040",
     padding: "5rem 3rem",
+    border: "1px solid #ccc",
+    borderRadius: "10px",
   },
   loginContainer: {
     width: "100vw",

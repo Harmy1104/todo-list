@@ -4,13 +4,13 @@ import TodoList from "./TodoList";
 import TodoContextProvider from "../context/TodoContext";
 import { useUserContext } from "../context/UserContext";
 import { Grid, Typography } from "@material-ui/core";
+import sine from "../assets/sine.gif";
 
 const TodoDashboard = (props) => {
   const { user, setUserAccount } = useUserContext();
 
   useEffect(async () => {
     const unsubscribe = await setUserAccount();
-    console.log(user);
     return () => {
       unsubscribe();
     };
@@ -30,7 +30,7 @@ const TodoDashboard = (props) => {
       </Grid>
     );
   } else {
-    return <Typography variant="h1">Please wait...</Typography>;
+    return <Typography variant="h1">Loading...</Typography>;
   }
 };
 
