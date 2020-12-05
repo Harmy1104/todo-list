@@ -11,6 +11,8 @@ import { Add } from "@material-ui/icons";
 import React, { useState } from "react";
 import { useTodoContext } from "../context/TodoContext";
 import Todo from "./Todo";
+import { useUserContext } from "../context/UserContext";
+import firebase from "../firebase";
 
 const TodoList = () => {
   const inputLabel = "Enter Todo";
@@ -18,6 +20,8 @@ const TodoList = () => {
 
   const { todos, addTodo } = useTodoContext();
   let [title, setTitle] = useState("");
+
+  let dbRef = firebase.firestore().collection('user')
 
   return (
     <Grid container className={classes.root}>

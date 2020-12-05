@@ -1,4 +1,10 @@
-import { Button, IconButton, makeStyles, Typography } from "@material-ui/core";
+import {
+  Avatar,
+  Button,
+  IconButton,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 import { Brightness3, WbSunnyRounded } from "@material-ui/icons";
 import { useThemeContext } from "../context/ThemeContext";
 import { useUserContext } from "../context/UserContext";
@@ -17,6 +23,11 @@ const Nav = (props) => {
 
   return (
     <div className={classes.toolBar}>
+      <Avatar
+        alt={user.displayName}
+        src={user.providerData[0].photoURL}
+        className={classes.avatar}
+      />
       <Typography variant="h5" className={classes.name}>
         Hello, {user.displayName}
       </Typography>
@@ -47,9 +58,12 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(5),
   },
   name: {
-    marginLeft: theme.spacing(5),
+    marginLeft: theme.spacing(2),
     marginRight: theme.spacing(5),
     flexGrow: "1",
+  },
+  avatar: {
+    marginLeft: theme.spacing(7),
   },
 }));
 

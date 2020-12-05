@@ -11,49 +11,21 @@ const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const db = firebase.firestore();
 
-  const setUserDatabase = (user) => {
-    var docRef = db.collection("users").doc(user.id);
-    docRef
-      .set({
-        id: user.id,
-        name: user.name || "",
-        email: user.email || "",
-        image: user.image || "",
-        todos: user.todos,
-      })
-      .then(function () {
-        console.log("Document successfully written!");
-      })
-      .catch(function (error) {
-        console.error("Error writing document: ", error);
-      });
-  };
-
   const setUserAccount = () => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      // setting the user
+    const unsubscribe = auth.onAuthStateChanged(async (user) => {
       setUser(user);
-
-      // checking if the user is in the database setup already
-      var docRef = db.collection("users").doc(user.uid);
-      docRef
-        .get()
-        .then(function (doc) {
-          if (doc.exists) {
-            console.log(doc.data());
-          } else {
-            setUserDatabase({
-              id: user.uid,
-              name: user.displayName,
-              email: user.email,
-              image: user.providerData[0].photoURL,
-              todos: [],
-            });
-          }
-        })
-        .catch(function (error) {
-          console.log("-- Error getting document -- \n", error);
+      const userDocRef = db.collection("users").doc(user.uid);
+      try {
+        await userDocRef.set({
+          id: user.uid,
+          name: user.displayName,
+          email: user.email,
+          image: user.providerData[0].photoURL,
+          todos: [],
         });
+      } catch (err) {
+        console.log("-- Error setting data --\n", err);
+      }
     });
 
     return unsubscribe;

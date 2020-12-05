@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { v4 as uuid } from "uuid";
+import { useUserContext } from "../context/UserContext";
+import firebase from "../firebase";
 
 export const TodoContext = createContext();
 
@@ -8,23 +10,49 @@ export const useTodoContext = () => {
 };
 
 const TodoContextProvider = ({ children }) => {
-  const [todos, setTodo] = useState([]);
+  const [todos, setTodos] = useState([]);
+  let { user } = useUserContext();
+  const db = firebase.firestore();
+  const userDocRef = db.collection("users");
+  let db_todos_length;
+  userDocRef
+    .doc(user.uid)
+    .get()
+    .then((doc) => {
+      if (doc.exists) {
+        db_todos_length = doc.data().todos.length;
+      } else {
+        console.log("-- Doc does not exists --");
+      }
+    })
+    .catch((err) => {
+      console.log("-- Cannot get Doc --", err);
+    });
 
   const addTodo = (title) => {
     if (title !== "") {
-      setTodo([
-        {
-          id: uuid(),
-          title: title,
-          isComplete: false,
-        },
-        ...todos,
-      ]);
+      // setTodos([
+      //   {
+      //     id: uuid(),
+      //     title: title,
+      //     isComplete: false,
+      //   },
+      //   ...todos,
+      // ]);
+      if (db_todos_length < 100) {
+        userDocRef.doc(user.uid).set({
+          todos: todos.unshift({
+            id: uuid(),
+            title: title,
+            isComplete: false,
+          }),
+        });
+      }
     }
   };
 
   const removeTodo = (id) => {
-    setTodo([
+    setTodos([
       ...todos.filter((todo) => {
         if (todo.id === id) {
           return "";
@@ -35,7 +63,7 @@ const TodoContextProvider = ({ children }) => {
   };
 
   const markDone = (id) => {
-    setTodo([
+    setTodos([
       ...todos.filter((todo) => {
         if (todo.id === id) {
           todo.isComplete = !todo.isComplete;
