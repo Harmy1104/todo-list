@@ -7,8 +7,8 @@ import {
   makeStyles,
   OutlinedInput,
 } from "@material-ui/core";
-import { Add } from "@material-ui/icons";
-import React, { useState } from "react";
+import { Add, BorderRightRounded } from "@material-ui/icons";
+import React, { useEffect, useState } from "react";
 import { useTodoContext } from "../context/TodoContext";
 import Todo from "./Todo";
 import { useUserContext } from "../context/UserContext";
@@ -17,11 +17,9 @@ import firebase from "../firebase";
 const TodoList = () => {
   const inputLabel = "Enter Todo";
   const classes = useStyles();
-
-  const { todos, addTodo } = useTodoContext();
   let [title, setTitle] = useState("");
 
-  let dbRef = firebase.firestore().collection('user')
+  const { todos, addTodo } = useTodoContext();
 
   return (
     <Grid container className={classes.root}>
@@ -32,6 +30,7 @@ const TodoList = () => {
             id="outlined-adornment-password"
             type="text"
             value={title}
+            style={{ borderRadius: "10px" }}
             onChange={(event) => setTitle((title = event.target.value))}
             onKeyPress={(event) => {
               if (event.key === "Enter") {

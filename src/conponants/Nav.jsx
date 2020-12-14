@@ -22,7 +22,7 @@ const Nav = (props) => {
   };
 
   return (
-    <div className={classes.toolBar}>
+    <header className={classes.toolBar}>
       <Avatar
         alt={user.displayName}
         src={user.providerData[0].photoURL}
@@ -41,7 +41,7 @@ const Nav = (props) => {
       >
         {isDarkMode ? <WbSunnyRounded /> : <Brightness3 />}
       </IconButton>
-    </div>
+    </header>
   );
 };
 

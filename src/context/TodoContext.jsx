@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
-import { v4 as uuid } from "uuid";
 import { useUserContext } from "../context/UserContext";
 import firebase from "../firebase";
+
+let t_id = 0;
 
 export const TodoContext = createContext();
 
@@ -13,41 +14,31 @@ const TodoContextProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
   let { user } = useUserContext();
   const db = firebase.firestore();
-  const userDocRef = db.collection("users");
-  let db_todos_length;
-  userDocRef
+  const todosCollection = db
+    .collection("users")
     .doc(user.uid)
-    .get()
-    .then((doc) => {
-      if (doc.exists) {
-        db_todos_length = doc.data().todos.length;
-      } else {
-        console.log("-- Doc does not exists --");
-      }
-    })
-    .catch((err) => {
-      console.log("-- Cannot get Doc --", err);
-    });
+    .collection("todos");
 
   const addTodo = (title) => {
     if (title !== "") {
-      // setTodos([
-      //   {
-      //     id: uuid(),
-      //     title: title,
-      //     isComplete: false,
-      //   },
-      //   ...todos,
-      // ]);
-      if (db_todos_length < 100) {
-        userDocRef.doc(user.uid).set({
-          todos: todos.unshift({
-            id: uuid(),
-            title: title,
-            isComplete: false,
-          }),
-        });
-      }
+      ++t_id;
+
+      // show in ui
+      setTodos([
+        {
+          id: t_id,
+          title: title,
+          isComplete: false,
+        },
+        ...todos,
+      ]);
+
+      // add to db
+      todosCollection.doc(String(t_id)).set({
+        id: t_id,
+        title: title,
+        isComplete: false,
+      });
     }
   };
 

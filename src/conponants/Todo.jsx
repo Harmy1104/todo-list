@@ -15,6 +15,7 @@ const Todo = ({ todo }) => {
     paper: {
       marginTop: `${theme.spacing(2)}px`,
       padding: theme.spacing(1),
+      borderRadius: "10px",
     },
     centerCenter: {
       display: "flex",

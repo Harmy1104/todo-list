@@ -21,7 +21,6 @@ const UserContextProvider = ({ children }) => {
           name: user.displayName,
           email: user.email,
           image: user.providerData[0].photoURL,
-          todos: [],
         });
       } catch (err) {
         console.log("-- Error setting data --\n", err);
