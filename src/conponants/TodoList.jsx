@@ -19,7 +19,8 @@ const TodoList = () => {
   const classes = useStyles();
   let [title, setTitle] = useState("");
 
-  const { todos, addTodo } = useTodoContext();
+  const { todos, addTodo, getTodos } = useTodoContext();
+  // getTodos();
 
   return (
     <Grid container className={classes.root}>
