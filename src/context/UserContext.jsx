@@ -12,18 +12,22 @@ const UserContextProvider = ({ children }) => {
   const db = firebase.firestore();
 
   const setUserAccount = () => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      setUser(user);
-      const userDocRef = db.collection("users").doc(user.uid);
-      try {
-        await userDocRef.set({
-          id: user.uid,
-          name: user.displayName,
-          email: user.email,
-          image: user.providerData[0].photoURL,
-        });
-      } catch (err) {
-        console.log("-- Error setting data --\n", err);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+        const userDocRef = db.collection("users").doc(user.uid);
+        try {
+          userDocRef.set({
+            id: user.uid,
+            name: user.displayName,
+            email: user.email,
+            image: user.providerData[0].photoURL,
+          });
+        } catch (err) {
+          console.log("-- Error setting data --\n", err);
+        }
+      } else {
+        console.log("BTW, you are not logged in.");
       }
     });
 

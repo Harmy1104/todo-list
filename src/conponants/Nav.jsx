@@ -26,7 +26,10 @@ const Nav = (props) => {
       <Avatar
         alt={user.displayName}
         src={user.providerData[0].photoURL}
-        className={classes.avatar}
+        className={
+          user.providerData[0].photoURL ? classes.avatar : classes.altAvatar
+        }
+        sizes="large"
       />
       <Typography variant="h5" className={classes.name}>
         Hello, {user.displayName}
@@ -64,6 +67,10 @@ const useStyles = makeStyles((theme) => ({
   },
   avatar: {
     marginLeft: theme.spacing(7),
+  },
+  altAvatar: {
+    color: theme.palette.getContrastText(theme.palette.primary.main),
+    backgroundColor: theme.palette.primary.main,
   },
 }));
 

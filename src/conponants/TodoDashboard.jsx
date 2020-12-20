@@ -7,13 +7,13 @@ import { Grid, Typography } from "@material-ui/core";
 
 const TodoDashboard = (props) => {
   const { user, setUserAccount } = useUserContext();
+  let unsubscribe;
 
   useEffect(() => {
-    let unsubscribe;
-    const setUser = async () => {
-      unsubscribe = await setUserAccount();
-    };
-    setUser();
+    (function setUser() {
+      unsubscribe = setUserAccount();
+    })();
+
     return () => {
       unsubscribe();
     };

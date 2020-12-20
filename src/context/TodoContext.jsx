@@ -20,15 +20,15 @@ const TodoContextProvider = ({ children }) => {
     .collection("todos");
 
   const getTodos = () => {
-    // IIFE - Immediately Invoked Function Expression
     (async function IIFESetTodoId() {
       let db_todos_list = await todosCollection.get();
       console.log(db_todos_list.docs);
       if (db_todos_list.docs.length > 0) {
+        let temp = [];
         db_todos_list.docs.map((item) => {
-          setTodos([item.data(), ...todos]);
-          console.log(item);
+          temp.unshift(item.data());
         });
+        setTodos(temp);
       }
     })();
   };
@@ -51,6 +51,7 @@ const TodoContextProvider = ({ children }) => {
       todosCollection.doc(String(todo_id)).set({
         id: todo_id,
         title: title,
+        dateCreated: new Date(),
         isComplete: false,
       });
     }

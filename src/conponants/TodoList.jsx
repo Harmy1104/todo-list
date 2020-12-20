@@ -20,7 +20,10 @@ const TodoList = () => {
   let [title, setTitle] = useState("");
 
   const { todos, addTodo, getTodos } = useTodoContext();
-  // getTodos();
+
+  useEffect(() => {
+    getTodos();
+  }, []);
 
   return (
     <Grid container className={classes.root}>
