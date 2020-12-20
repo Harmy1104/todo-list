@@ -26,7 +26,8 @@ const TodoContextProvider = ({ children }) => {
       if (db_todos_list.docs.length > 0) {
         let temp = [];
         db_todos_list.docs.map((item) => {
-          temp.unshift(item.data());
+          temp.push(item.data());
+          return true;
         });
         setTodos(temp);
       }
@@ -66,6 +67,16 @@ const TodoContextProvider = ({ children }) => {
         return todo;
       }),
     ]);
+
+    todosCollection
+      .doc(id)
+      .delete()
+      .then(() => {
+        console.log("Deleted");
+      })
+      .catch((err) => {
+        console.log("There was an error deleting." + err);
+      });
   };
 
   const markDone = (id) => {

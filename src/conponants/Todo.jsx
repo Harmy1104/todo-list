@@ -6,7 +6,7 @@ import {
   Paper,
   Typography,
 } from "@material-ui/core";
-import { Delete } from "@material-ui/icons";
+import { Delete, Edit } from "@material-ui/icons";
 import { useTodoContext } from "../context/TodoContext";
 
 const Todo = ({ todo }) => {
@@ -37,22 +37,30 @@ const Todo = ({ todo }) => {
   return (
     <Paper className={classes.paper}>
       <Grid container alignItems="center">
-        <Grid item xs={1} className={classes.centerCenter}>
-          <Checkbox
-            checked={todo.isComplete}
-            onClick={() => markDone(todo.id)}
-            inputProps={{ "aria-label": "primary checkbox" }}
-          />
-        </Grid>
         <Grid item style={{ flexGrow: "1" }} xs={10}>
           <Typography variant="h6" className={classes.todoText}>
             {todo.title}
           </Typography>
         </Grid>
-        <Grid item xs={1} className={classes.centerCenter}>
-          <IconButton aria-label="delete" onClick={() => removeTodo(todo.id)}>
-            <Delete />
-          </IconButton>
+
+        <Grid container item xs={2} className={classes.centerCenter}>
+          <Grid item xs={4}>
+            <Checkbox
+              checked={todo.isComplete}
+              onClick={() => markDone(todo.id)}
+              inputProps={{ "aria-label": "primary checkbox" }}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <IconButton aria-label="delete" onClick={() => removeTodo(todo.id)}>
+              <Edit />
+            </IconButton>
+          </Grid>
+          <Grid item xs={4}>
+            <IconButton aria-label="delete" onClick={() => removeTodo(todo.id)}>
+              <Delete />
+            </IconButton>
+          </Grid>
         </Grid>
       </Grid>
     </Paper>

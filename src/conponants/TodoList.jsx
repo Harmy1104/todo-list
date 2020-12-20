@@ -7,12 +7,10 @@ import {
   makeStyles,
   OutlinedInput,
 } from "@material-ui/core";
-import { Add, BorderRightRounded } from "@material-ui/icons";
+import { Add } from "@material-ui/icons";
 import React, { useEffect, useState } from "react";
 import { useTodoContext } from "../context/TodoContext";
 import Todo from "./Todo";
-import { useUserContext } from "../context/UserContext";
-import firebase from "../firebase";
 
 const TodoList = () => {
   const inputLabel = "Enter Todo";
