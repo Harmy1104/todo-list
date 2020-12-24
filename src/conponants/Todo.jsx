@@ -11,39 +11,25 @@ import MuiAlert from "@material-ui/lab/Alert";
 import { Delete, Edit } from "@material-ui/icons";
 import { useTodoContext } from "../context/TodoContext";
 import { useState } from "react";
+import style from "../index.module.css";
+import { ThemeContext, useThemeContext } from "../context/ThemeContext";
 
 // CSS
 // TODO: put css in css file
-const useStyles = makeStyles((theme) => ({
-  loginContainer: {
-    background: theme.palette.type == "dark" ? "#282828" : "#e5e5e5",
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(1),
-    // border: theme.palette.type == "dark" ? "1px solid #000" : "1px solid #ccc",
-    borderRadius: "10px",
-  },
-  paper: {
-    marginTop: `${theme.spacing(2)}px`,
-    padding: theme.spacing(1),
-    borderRadius: "10px",
-  },
-  centerCenter: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  todoText: {
-    margin: theme.spacing(1),
-    marginLeft: theme.spacing(3),
-    marginRight: theme.spacing(3),
-    overflow: "hidden",
-    textAlign: "justify",
-  },
-}));
+// const useStyles = makeStyles((theme) => ({
+//   todoText: {
+//     margin: theme.spacing(1),
+//     marginLeft: theme.spacing(3),
+//     marginRight: theme.spacing(3),
+//     overflow: "hidden",
+//     textAlign: "justify",
+//   },
+// }));
 
 const Todo = ({ todo }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
 
+  const { isDarkMode } = useThemeContext();
   // Todos
   const { markDone, removeTodo } = useTodoContext();
   // for toast
@@ -65,21 +51,21 @@ const Todo = ({ todo }) => {
   };
 
   return (
-    <div className={classes.loginContainer}>
+    <div className={isDarkMode ? style.darkMode : style.lightMode}>
       <Grid container alignItems="center">
         <Grid item style={{ flexGrow: "1" }} xs={10}>
           <Typography
             variant="h6"
-            className={classes.todoText}
             style={{
               opacity: todo.isComplete ? "0.2" : "1",
               fontWeight: todo.isComplete ? "100" : "200",
+              overflowWrap: "anywhere",
             }}
           >
             {todo.title}
           </Typography>
         </Grid>
-        <Grid container item xs={2} className={classes.centerCenter}>
+        <Grid container item xs={2}>
           <Grid item xs={4}>
             <Checkbox
               checked={todo.isComplete}

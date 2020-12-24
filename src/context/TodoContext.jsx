@@ -19,19 +19,16 @@ const TodoContextProvider = ({ children }) => {
     .doc(user.uid)
     .collection("todos");
 
-  const getTodos = () => {
-    (async function IIFESetTodoId() {
-      let db_todos_list = await todosCollection.get();
-      console.log(db_todos_list.docs);
-      if (db_todos_list.docs.length > 0) {
-        let temp = [];
-        db_todos_list.docs.map((item) => {
-          temp.push(item.data());
-          return true;
-        });
-        setTodos(temp);
-      }
-    })();
+  const getTodos = async () => {
+    let db_todos_list = await todosCollection.get();
+    if (db_todos_list.docs.length > 0) {
+      let temp = [];
+      db_todos_list.docs.map((item) => {
+        temp.push(item.data());
+        return true;
+      });
+      setTodos(temp);
+    }
   };
 
   const addTodo = (title) => {
